@@ -1,0 +1,12 @@
+.table__top-data {
+  border: 1px solid #ccc;
+}
+
+.dataTables_paginate {
+  border: 1px solid #ccc !important;
+}
+
+.paginate_button.previous {
+  border: 1px solid #ccc;
+  background-color: aqua;
+}
