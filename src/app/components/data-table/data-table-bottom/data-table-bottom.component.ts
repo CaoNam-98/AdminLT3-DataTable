@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { timer } from 'rxjs';
 import { Item } from '../../../models/item.model';
-import { ItemStoreService } from '../../../services/store/item-store.service';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-data-table-bottom',
@@ -14,21 +12,15 @@ export class DataTableBottomComponent implements OnInit {
 
   listItem: any[] = [];
   item$: Subscription | undefined;
-
+  isLoaded: boolean = false;
   dtOptions: any = {};
 
   constructor(
-    private itemService: ItemStoreService,
   ) { }
 
   ngOnInit(): void {
-    this.item$ = this.itemService.ItemListUpdate.subscribe(
-      (data) => {
-        for(let value of Object.values(data)) {
-          this.listItem.push(value);
-        }
-      }
-    )
+    timer(500)
+      .subscribe(() => this.isLoaded = true)
 
     this.dtOptions = {
       ajax: 'assets/data.json',
@@ -64,6 +56,5 @@ export class DataTableBottomComponent implements OnInit {
 
   ngOnDestroy() {
     this.item$ ? this.item$.unsubscribe() : '';
-    // this.dtTrigger.unsubscribe();
   }
 }

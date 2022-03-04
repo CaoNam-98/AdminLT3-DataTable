@@ -15,6 +15,7 @@ export class DataTableTopComponent implements OnInit, OnDestroy {
   item$: Subscription | undefined;
   dtTrigger: Subject<any> = new Subject<any>();
   dtOptions: DataTables.Settings = {};
+  isLoaded = false;
 
   constructor(
     private itemService: ItemStoreService,
@@ -30,12 +31,14 @@ export class DataTableTopComponent implements OnInit, OnDestroy {
       dom: 'rtip', // Bỏ phần show entries
       orderCellsTop: true,
     };
+    this.isLoaded = false;
     this.itemService.GetListItems();
     this.item$ = this.itemService.ItemListUpdate.subscribe(
       (data) => {
         for(let value of Object.values(data)) {
           this.listItem.push(value);
         }
+        this.isLoaded = true;
         this.dtTrigger.next();
       }
     )
