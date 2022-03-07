@@ -10,3 +10,11 @@
   border: 1px solid #ccc;
   background-color: aqua;
 }
+
+.table__top {
+  padding: 20px 20px;
+}
+
+.table-hover {
+  margin-top: 0px !important;
+}

@@ -2,3 +2,11 @@
   border: 1px solid #ccc;
 }
 
+.table__bottom {
+  padding: 20px 20px;
+}
+
+.table-hover {
+  margin-top: 0px !important;
+}
+
